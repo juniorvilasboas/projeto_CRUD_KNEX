@@ -1,3 +1,3 @@
-Sistema criado como parte do aprendizado do curso [DevPleno](www.devpleno.com)
+Sistema criado como parte do aprendizado do curso [DevPleno](http://www.devpleno.com)
 
-By [Seveware Sistemas](www.serveware.com.br)
+By [Seveware Sistemas](http://www.serveware.com.br)
