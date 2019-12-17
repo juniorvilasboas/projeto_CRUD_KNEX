@@ -1,0 +1,38 @@
+<%- include('../partials/header') %>
+    <h1>Projetos</h1>
+    <p><a href="/projetos/create">Novo projeto</a></p>
+    <table class="table table-striped table-hover table-bordered">
+        <tr>
+            <th>Nome</th>
+            <th>Dono</th>
+            <th>Gerente</th>
+            <th>Ações</th>
+        </tr>
+        <% projetos.map( projeto => { %>
+            <tr>
+                <td><%- projeto.nome %> </td>
+                <td><%- projeto.dono %> </td>
+                <td><%- projeto.gerente %> </td>
+                <td>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Exemplo básico">
+                        <a type="button" class="btn btn-primary" href="/projetos/update/<%- projeto.id %>">Editar</a>
+                        <a type="button" class="btn btn-danger" href="/projetos/delete/<%- projeto.id %>" onClick="return confirm('Deseja realmente excluir <%- projeto.nome %>?')">Excluir</a>
+                    </div>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+    <nav aria-label="Navegação de página exemplo">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Anterior</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+            <a class="page-link" href="#">Próximo</a>
+            </li>
+        </ul>
+    </nav>
+<%- include('../partials/footer') %>

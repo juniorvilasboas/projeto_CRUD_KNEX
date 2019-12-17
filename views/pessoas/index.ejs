@@ -1,0 +1,38 @@
+<%- include('../partials/header') %>
+    <h1>Pessoas</h1>
+    <p><a href="/pessoas/create">Nova pessoa</a></p>
+    <table class="table table-striped table-hover table-bordered">
+        <tr>
+            <th>Nome</th>
+            <th>Nascimento</th>
+            <th>Cargo</th>
+            <th>Ações</th>
+        </tr>
+        <% pessoas.map( pessoa => { %>
+            <tr>
+                <td><%- pessoa.nome %> </td>
+                <td><%- pessoa.nascimento %> </td>
+                <td><%- pessoa.cargo %> </td>
+                <td>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Exemplo básico">
+                        <a type="button" class="btn btn-primary" href="/pessoas/update/<%- pessoa.id %>">Editar</a>
+                        <a type="button" class="btn btn-danger" href="/pessoas/delete/<%- pessoa.id %>" onClick="return confirm('Deseja realmente excluir <%- pessoa.nome %>?')">Excluir</a>
+                    </div>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+    <nav aria-label="Navegação de página exemplo">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Anterior</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+            <a class="page-link" href="#">Próximo</a>
+            </li>
+        </ul>
+    </nav>
+<%- include('../partials/footer') %>

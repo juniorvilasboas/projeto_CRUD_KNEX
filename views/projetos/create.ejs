@@ -1,0 +1,31 @@
+<%- include('../partials/header') %>
+    <h1>Projetos</h1>
+    <p><a href="/projetos">Voltar para projetos</a></p>
+    <form method="post">
+        <div class="form-group">
+            <label for="nome">Nome do projeto</label>
+            <input class="form-control" id="nome" name="nome" placehold="Nome do projeto" />
+        </div>
+        <div class="form-group">
+            <label for="dono">Dono</label>
+            <select class="form-control" name="dono">
+                    <option></option>
+                <% pessoas.map( pessoa => { %>
+                    <option value="<%- pessoa.id %>"><%- pessoa.nome %></option>
+                <% } ) %>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="gerente">Gerente</label>
+            <select class="form-control" name="gerente">
+                    <option></option>
+                <% pessoas.map( pessoa => { %>
+                    <option value="<%- pessoa.id %>"><%- pessoa.nome %></option>
+                <% } ) %>
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+    </form>
+<%- include('../partials/footer') %>

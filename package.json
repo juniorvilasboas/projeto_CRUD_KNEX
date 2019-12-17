@@ -1,0 +1,28 @@
+{
+  "name": "projeto-crud",
+  "version": "1.0.0",
+  "description": "Projeto criado para gerenciar um CRUD",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "CRUD",
+    "create",
+    "retrivier",
+    "update",
+    "delete"
+  ],
+  "author": "Moacyr Santana",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "mysql": "^2.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1"
+  }
+}
