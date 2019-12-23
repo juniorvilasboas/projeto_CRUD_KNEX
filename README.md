@@ -1,3 +1,3 @@
 # Projeto CRUD com Knex
 
-projeto desenvolvido para práticas do curso da [DevePleno](www.devepleno.com.br)
+projeto desenvolvido para práticas do curso FullStack Master da [DevPleno](http://www.devepleno.com)
