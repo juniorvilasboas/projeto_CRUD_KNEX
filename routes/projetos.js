@@ -1,17 +1,17 @@
 const express = require('express')
-const projetosControllers = require('../controllers/projetos')
+const projetosController = require('../controllers/projetos')
 
-const projetosRouter = ({ connection }) => {
+const projetoRouter = (dependencies) => {
     const router = express.Router()
 
-    router.get('/', projetosControllers.index.bind(null, connection))
-    router.get('/create', projetosControllers.createForm.bind(null, connection))
-    router.post('/create', projetosControllers.createProcess.bind(null, connection))
-    router.get('/update/:id', projetosControllers.updateForm.bind(null, connection))
-    router.post('/update/:id', projetosControllers.updateProcess.bind(null, connection))
-    router.get('/delete/:id', projetosControllers.deleteOne.bind(null, connection))
+    router.get('/', projetosController.index.bind(null, dependencies))
+    router.get('/create', projetosController.createForm.bind(null, dependencies))
+    router.post('/create', projetosController.createProcess.bind(null, dependencies))
+    router.get('/edit/:id', projetosController.editForm.bind(null, dependencies))
+    router.post('/edit/:id', projetosController.editProcess.bind(null, dependencies))
+    router.get('/delete/:id', projetosController.deleteOne.bind(null, dependencies))
 
     return router
 }
 
-module.exports = projetosRouter
+module.exports = projetoRouter

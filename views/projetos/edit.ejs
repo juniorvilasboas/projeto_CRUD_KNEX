@@ -1,16 +1,16 @@
 <%- include('../partials/header') %>
-    <h1>Novo Projeto</h1>
+    <h1>Editar projeto</h1>
     <p><a href="/projetos">Voltar para projetos</a></p>
     <form method="post">
         <div class="form-group">
             <label for="nome">Nome</label>
-            <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome do projeto" />
+            <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome do projeto" value="<%- projeto[0].nome %>" />
         </div>
         <div class="form-group">
             <label for="dono">Dono</label>
             <select class="form-control" id="dono" name="dono">
                 <% pessoa.forEach( pes => { %>
-                    <option value="<%- pes.id %>"><%- pes.nome %></option>
+                    <option value="<%- pes.id %>" <%= pes.id === projeto[0].dono_id ? 'selected' : '' %>><%= pes.nome%></option>
                 <% }) %>
             </select>
         </div>
@@ -18,10 +18,10 @@
             <label for="gerente">Gerente</label>
             <select class="form-control" id="gerente" name="gerente">
                 <% pessoa.forEach( pes => { %>
-                    <option value="<%- pes.id %>"><%- pes.nome %></option>
+                    <option value="<%- pes.id %>" <%= pes.id === projeto[0].gerente_id ? 'selected' : '' %>><%= pes.nome%></option>
                 <% }) %>
             </select>
         </div>
-        <button type="submit" class="btn btn-success">Salvar</button>
+        <button class="btn btn-success">Salvar</button>
     </form>
 <%- include('../partials/footer') %>

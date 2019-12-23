@@ -1,43 +1,52 @@
 const pessoas = require('../models/pessoas')
+const moment = require('moment')
 
-const index = async(connection, req, res) => {
-    const results = await pessoas.findAll(connection)
+const index = async(dependencies, req, res) => {
+    const pessoa = await pessoas.getPessoas(dependencies, req.query)
 
-    res.render('pessoas/index', { pessoas: results })
+    res.render('pessoas/index', {
+        pessoa,
+        moment
+    })
 }
 
-const deleteOne = async(connection, req, res) => {
-    await pessoas.deleteOne(connection, req.params.id)
+const createForm = async(req, res) => {
 
-    res.redirect('/pessoas')
-}
-
-const createForm = (req, res) =>  {
     res.render('pessoas/create')
 }
 
-const createProcess = async(connection, req, res) => {
-    await pessoas.create(connection, req.body)
+const createProcess = async(dependencies, req, res) => {
+    await pessoas.createPessoa(dependencies, req.body)
+
     res.redirect('/pessoas')
 }
 
-const updateForm = async(connection, req, res) =>  {
-    const pessoa = await pessoas.findById(connection, req.params.id)
+const editForm = async(dependencies, req, res) => {
+    const pessoa = await pessoas.getPessoaById(dependencies, req.params.id)
 
-    res.render('pessoas/update', { pessoa })
+    res.render('pessoas/edit', {
+        pessoa,
+        moment
+    })
 }
 
-const updateProcess = async(connection, req, res) => {
-    await pessoas.update(connection, req.params.id, req.body)
+const editProcess = async(dependencies, req, res) => {
+    await pessoas.editPessoa(dependencies, req.body, req.params.id)
+
+    res.redirect('/pessoas')
+}
+
+const deleteOne = async(dependencies, req, res) => {
+    await pessoas.deletePessoa(dependencies, req.params.id)
     
     res.redirect('/pessoas')
 }
 
 module.exports = {
     index,
-    deleteOne,
     createForm,
     createProcess,
-    updateForm,
-    updateProcess
+    editForm,
+    editProcess,
+    deleteOne
 }

@@ -1,71 +1,69 @@
-const findAll = (connection) => {
-    return new Promise((resolve, reject) => {
-        connection.query('select * from pessoas order by nome asc', (err, results) => {
-            if(err) {
-                reject(err)
-            } else {
-                resolve(results)
-            }
-        })
-    })
+const formataData = require('../ultils/functions')
+
+const getPaginationParams = query => {
+    const { currentPage, pages, pageSize } = query
+
+    return {
+        currentPage : currentPage ? parseInt(currentPage) : 0,
+        pages       : pages ? parseInt(pages) : 1,
+        pageSize    : pageSize ? parseInt(pageSize) : 10
+    }
 }
 
-const deleteOne = (connection, id) => {
-    return new Promise((resolve, reject) => {
-        connection.query('delete from pessoas where id = '+id+' limit 1', (err) => {
-            if(err) {
-                reject(err)
-            } else {
-                resolve()
-            }
-        })
-    })
+const getPessoas = async({ db }, query) => {
+    const pagination = getPaginationParams(query)    
+    const pessoas = await db('pessoas')
+                            .select('*')
+                            .offset(pagination.currentPage * pagination.pageSize)
+                            .limit(pagination.pageSize)
+
+    const pessoasCount = await db('pessoas')
+                            .count('* as total')
+                            .first()
+
+    pagination.total = pessoasCount.total
+    pagination.totalPages = Math.ceil(pessoasCount.total / pagination.pageSize)
+
+    return  {
+        data: pessoas,
+        pagination
+    }
 }
 
-const create = (connection, data) => {
-    return new Promise((resolve, reject) => {
-        connection.query(`insert into pessoas (nome, nascimento, cargo) values ('${data.nome}', '${data.nascimento}', '${data.cargo}')`, (err) => {
-            if(err) {
-                reject(err)
-            } else {
-                resolve()
-            }
-        })
-    })
+const getPessoaById = async({ db }, id) => {
+    const pessoa = await db('pessoas')
+                            .select('*')
+                            .where('id', id)
+
+    return pessoa
 }
 
-const update = (connection, id, data) => {
-    return new Promise((resolve, reject) => {
-        connection.query(`update pessoas set nome='${data.nome}', nascimento='${data.nascimento}', cargo='${data.cargo}' where id='${id}'`, (err) => {
-            if(err) {
-                reject(err)
-            } else {
-                resolve()
-            }
-        })
-    })
+const createPessoa = async({ db }, data) => {
+    data.nascimento = formataData(data.nascimento)
+    
+    await db('pessoas')
+            .insert(data)
 }
 
-const findById = (connection, id) => {
-    return new Promise((resolve, reject) => {
-        connection.query('select * from pessoas where id = '+id, (err, results) => {
-            if(err) {
-                reject(err)
-            } else {
-                if(results.length > 0) {
-                    resolve(results[0])
-                } else {
-                    resolve({})
-                }
-            }
-        })
-    })
+const editPessoa = async({ db }, data, id) => {
+    data.nascimento = formataData(data.nascimento)
+
+    await db('pessoas')
+            .where({ id: id })
+            .update(data)
+
+}
+
+const deletePessoa = async({ db }, id) => {
+    await db('pessoas')
+            .where({ id: id })
+            .del()
 }
 
 module.exports = {
-    findAll,
-    findById,
-    deleteOne,
-    create,
-    update
+    getPessoas,
+    getPessoaById,
+    createPessoa,
+    editPessoa,
+    deletePessoa
 }

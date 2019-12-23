@@ -1,7 +1,7 @@
 {
-  "name": "projeto-crud",
+  "name": "projeto-crud-knex",
   "version": "1.0.0",
-  "description": "Projeto criado para gerenciar um CRUD",
+  "description": "Projeto criado para gerenciar um CRUD com KNEX",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -20,7 +20,9 @@
     "body-parser": "^1.19.0",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
-    "mysql": "^2.17.1"
+    "knex": "^0.20.4",
+    "moment": "^2.24.0",
+    "mysql2": "^2.0.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.1"

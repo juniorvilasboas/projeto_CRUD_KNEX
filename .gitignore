@@ -1,1 +1,7 @@
 node_modules
+
+knex.*
+
+banco.sql
+pessoas.sql
+projetos.sql
