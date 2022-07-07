@@ -21,7 +21,7 @@
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "knex": "^0.20.4",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "mysql2": "^2.0.2"
   },
   "devDependencies": {
